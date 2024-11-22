@@ -10,9 +10,10 @@
 <?php
 
 class Animal{
-public $type='animal';
-public $name='John';
-public $hair_color='black';
+protected $type='animal';
+protected $name='John';
+protected $hair_color='black';
+protected $feet=['front-left','front-right','back-left','back-right'];
 
   function __construct($type,$name,$hair_color){
     $this->type=$type;
@@ -28,19 +29,28 @@ public $hair_color='black';
     echo $this->name.' is running at 20km/h';
   }
 
+  public function getName(){
+    return $this->name;
+  } 
+
+  public function setName($name){
+        $this->name=$name;
+  } 
+
 }
 
 //實例化(instance)
 $cat=new Animal('cat','Kitty','white');
 
-echo $cat->type;
-echo $cat->name;
-echo $cat->hair_color;
+//echo $cat->type;
+echo $cat->getName();
+//echo $cat->hair_color;
 echo $cat->run();
 echo $cat->speed();
+//print_r($cat->feet);
 
-
-
+$cat->setName('Mary');
+echo $cat->getName();
 
 
 
