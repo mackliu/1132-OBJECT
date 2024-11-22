@@ -8,11 +8,6 @@
 <body>
 <h1>物件的宣告</h1>
 <?php
-Interface Behavior{
-    public function run();
-    public function speed();
-    public function jump();
-}
 
 class Animal{
 protected $type='animal';
@@ -77,6 +72,11 @@ class Cat extends Animal implements Behavior{
 }
 
 
+Interface Behavior{
+    public function run();
+    public function speed();
+    public function jump();
+}
 
 
 
