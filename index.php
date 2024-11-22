@@ -49,11 +49,37 @@ echo $cat->run();
 echo $cat->speed();
 //print_r($cat->feet);
 
-$cat->setName('Mary');
+echo $cat->setName('Mary');
 echo $cat->getName();
 
 
+?>
 
+<h1>繼承</h1>
+<?php
+
+class Cat extends Animal{
+    protected $type='cat';
+    protected $name="Judy";
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+    }
+
+
+}
+
+
+$mycat=new Cat('white');
+
+echo $mycat->getName();
+echo "<br>";
+echo $mycat->run();
+echo "<br>";
+echo $mycat->speed();
+echo "<br>";
+$mycat->setName("judy");
+echo $mycat->getName();
+echo "<br>";
 
 
 ?>
