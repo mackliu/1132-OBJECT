@@ -63,7 +63,7 @@ echo $cat->getName();
 
 class Cat extends Animal implements Behavior{
     protected $type='cat';
-
+    protected $name='Kitty';
     function __construct($hair_color){
         $this->hair_color=$hair_color;
     }
@@ -72,9 +72,9 @@ class Cat extends Animal implements Behavior{
         echo $this->name . " jumpping 2m";
     }
 
-    function getFeet(){
+/*     function getFeet(){
         return $this->feet;
-    }
+    } */
 }
 
 
@@ -102,7 +102,50 @@ echo $mycat->getName();
 echo "<br>";
 echo $mycat->jump();
 
+//echo Cat::name;
+?>
 
+<H1>靜態宣告</H1>
+<?php
+
+class Dog extends Animal implements Behavior{
+    protected $type='dog';
+    protected $name='Doggy';
+    protected static  $count=0;
+    //static $count=0;
+
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+        self::$count++;
+    }
+
+    function bark(){
+        echo $this->name . " is barking";
+    }
+
+    function getFeet(){
+        return $this->feet;
+    }
+
+    static function getCount(){
+        return self::$count;
+    }
+
+    function jump(){
+        echo $this->name . " jumpping 1m";
+    }
+}
+
+echo Dog::getCount();
+
+$dog1=new Dog('brown');
+$dog2=new Dog('black');
+$dog3=new Dog('orange');
+$dog4=new Dog('white');
+$dog5=new Dog('white');
+
+
+echo Dog::getCount();
 ?>
 </body>
 </html>
