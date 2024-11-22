@@ -13,7 +13,7 @@ class Animal{
 protected $type='animal';
 protected $name='John';
 protected $hair_color='black';
-protected $feet=['front-left','front-right','back-left','back-right'];
+private $feet=['front-left','front-right','back-left','back-right'];
 
   function __construct($type,$name,$hair_color){
     $this->type=$type;
@@ -36,12 +36,15 @@ protected $feet=['front-left','front-right','back-left','back-right'];
   public function setName($name){
         $this->name=$name;
   } 
+  function getFeet(){
+    return $this->feet;
+}
 
 }
 
 //實例化(instance)
 $cat=new Animal('cat','Kitty','white');
-
+print_r($cat->getFeet());
 //echo $cat->type;
 echo $cat->getName();
 //echo $cat->hair_color;
@@ -60,7 +63,7 @@ echo $cat->getName();
 
 class Cat extends Animal implements Behavior{
     protected $type='cat';
-    protected $name="Judy";
+
     function __construct($hair_color){
         $this->hair_color=$hair_color;
     }
@@ -69,6 +72,9 @@ class Cat extends Animal implements Behavior{
         echo $this->name . " jumpping 2m";
     }
 
+    function getFeet(){
+        return $this->feet;
+    }
 }
 
 
@@ -81,6 +87,8 @@ Interface Behavior{
 
 
 $mycat=new Cat('white');
+
+print_r($mycat->getFeet());
 
 echo $mycat->getName();
 echo "<br>";
