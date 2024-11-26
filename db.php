@@ -54,8 +54,10 @@ class DB{
         if(isset($array['id'])){
             //update
             //update table set `欄位1`='值1',`欄位2`='值2' where `id`='值' 
+            $id=$array['id'];
+            unset($array['id']);
             $set=$this->a2s($array);
-            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='{$array['id']}'";
+            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='$id'";
                 
         }else{
             //insert
@@ -77,7 +79,7 @@ class DB{
             $sql .= " WHERE `id`='$id' ";
         }
 
-        echo $sql;  
+        //echo $sql;  
         return $this->pdo->exec($sql);
     }
 
@@ -122,6 +124,6 @@ $DEPT=new DB('dept');
 //$dept=$DEPT->q("SELECT * FROM dept");
 $dept=$DEPT->find(['code'=>'404']);
 //$DEPT->del(['code'=>'504']);
-$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊部']);
+$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
 dd($dept);
 
