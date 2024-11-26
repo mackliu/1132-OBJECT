@@ -53,15 +53,18 @@ class DB{
 
         if(isset($array['id'])){
             //update
-
+            //update table set `欄位1`='值1',`欄位2`='值2' where `id`='值' 
+            $set=$this->a2s($array);
+            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='{$array['id']}'";
+                
         }else{
             //insert
             $cols=array_keys($array);
-            
             $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
-            return $this->pdo->exec($sql);
         }
-
+        
+        echo $sql;
+        return $this->pdo->exec($sql);
     }
     
     function del($id){
