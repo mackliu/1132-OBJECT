@@ -12,10 +12,27 @@ class DB{
 
     /**
      * 撈出全部資料
-     * 
+     * 1. 整張資料表
+     * 2. 有條件
+     * 3. 其他SQL功能
      */
-    function all(){
-        return $this->q("SELECT * FROM $this->table");
+    function all(...$arg){
+        $sql="SELECT * FROM $this->table ";
+        if(!empty($arg[0])){
+            if(is_array($arg[0])){
+
+                $where=$this->a2s($arg[0]);
+                $sql=$sql . " WHERE ". join(" && ",$where);
+            }else{
+                //$sql=$sql.$arg[0];
+                $sql .= $arg[0];
+
+            }
+        }
+
+
+
+        return $this->fetchAll($sql);
     }
 
     
@@ -57,7 +74,7 @@ function dd($array){
 $DEPT=new DB('dept');
 
 //$dept=$DEPT->q("SELECT * FROM dept");
-$dept=$DEPT->all();
+$dept=$DEPT->all(['id'=>3]);
 
 dd($dept);
 
