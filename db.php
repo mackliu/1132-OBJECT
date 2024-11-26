@@ -30,7 +30,9 @@ class DB{
             }
         }
 
-
+        if(!empty($arg[1])){
+            $sql=$sql . $arg[1];
+        }
 
         return $this->fetchAll($sql);
     }
@@ -74,7 +76,7 @@ function dd($array){
 $DEPT=new DB('dept');
 
 //$dept=$DEPT->q("SELECT * FROM dept");
-$dept=$DEPT->all(['id'=>3]);
+$dept=$DEPT->all(" Order by `id` DESC");
 
 dd($dept);
 
