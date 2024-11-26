@@ -49,6 +49,21 @@ class DB{
         return $this->fetchOne($sql);
     }
 
+    function save($array){
+
+        if(isset($array['id'])){
+            //update
+
+        }else{
+            //insert
+            $cols=array_keys($array);
+            
+            $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
+            return $this->pdo->exec($sql);
+        }
+
+    }
+    
     function del($id){
         $sql="DELETE FROM $this->table ";
 
@@ -103,6 +118,7 @@ $DEPT=new DB('dept');
 
 //$dept=$DEPT->q("SELECT * FROM dept");
 $dept=$DEPT->find(['code'=>'404']);
-$DEPT->del(['code'=>'504']);
+//$DEPT->del(['code'=>'504']);
+$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊部']);
 dd($dept);
 
