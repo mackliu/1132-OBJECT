@@ -22,7 +22,7 @@ class DB{
     /**
      * 把陣列轉成條件字串陣列
      */
-    function toWhere($array){
+    function a2s($array){
         $tmp=[];
         foreach($array as $key => $value){
             $tmp[]="`$key`='$value'";
