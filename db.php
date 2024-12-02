@@ -10,6 +10,8 @@ class DB{
         $this->pdo=new PDO($this->dsn,'root','');
     }
 
+
+
     /**
      * 撈出全部資料
      * 1. 整張資料表
@@ -65,7 +67,7 @@ class DB{
             $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
         }
         
-        echo $sql;
+        //echo $sql;
         return $this->pdo->exec($sql);
     }
     
@@ -106,6 +108,21 @@ class DB{
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     
+        /**
+     * 方便使用各個聚合函式
+     */
+    
+     function math($math,$col='id',$where=[]){
+        $sql="SELECT $math(`$col`) FROM $this->table";
+
+        if(!empty($where)){
+            $tmp=$this->a2s($where);
+            $sql=$sql . " WHERE " . join(" && ", $tmp);
+        }
+
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+
 }
 
 /* function q($sql){
@@ -124,6 +141,8 @@ $DEPT=new DB('dept');
 //$dept=$DEPT->q("SELECT * FROM dept");
 $dept=$DEPT->find(['code'=>'404']);
 //$DEPT->del(['code'=>'504']);
-$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
-dd($dept);
+//$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
+//dd($dept);
+
+echo $DEPT->math('max','id',['code'=>'503']);
 
